@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
-import {UserContext} from '../contexts/UserAuthContext';
+import {AuthContext} from '../contexts/AuthContextProvider';
 const PrivatePath = ({children}) => {
 
-  const userContext = useContext(UserContext);
+  const userContext = useContext(AuthContext);
   console.log(userContext);
   const {userState} = userContext;
   if(userState === false){  
