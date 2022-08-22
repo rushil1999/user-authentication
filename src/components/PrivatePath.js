@@ -3,7 +3,6 @@ import {AuthContext} from '../contexts/AuthContextProvider';
 const PrivatePath = ({children}) => {
 
   const userContext = useContext(AuthContext);
-  console.log(userContext);
   const {userState} = userContext;
   if(userState === false){  
     console.log("User is NOT Signed in")

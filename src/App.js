@@ -20,6 +20,15 @@ function App() {
             </PrivatePath>
           }>
           </Route>
+          <Route path="/private-path" element={
+            <PrivatePath>
+                <Index/>
+            </PrivatePath>
+          }>
+          <Route path="/publicPath" element={
+                <Index/>
+          }></Route>
+          </Route>
           <Route path="/login" element={<Login/>}>
           </Route>
           <Route path="/navigation" element={<Navigation/>}>

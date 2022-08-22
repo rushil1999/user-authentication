@@ -65,7 +65,7 @@ const Navigation = () => {
         </div>)}
       </div>
       <div style={{textAlign: "center"}}>
-      <div style={{justifyContent: "center"}}>
+      <div style={{display: "flex", justifyContent: "space-around"}}> 
         <Stack direction="row" spacing={2}>
           {publicPathList.length > 0 && (<Item>
             <Paper>
