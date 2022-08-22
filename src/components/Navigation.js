@@ -1,21 +1,18 @@
 import React, { useContext, useEffect } from 'react';
-import {Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import {AuthContext} from '../contexts/AuthContextProvider.js';
-import {PathContext} from '../contexts/PathContextProvider.js'
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import Button from '@mui/material/Button';
 
 const Navigation = () => {
 
   const navigate = useNavigate()
 
-  const {authState} = useContext(AuthContext);
+  const [authState, setAuthState, userDetails] = useContext(AuthContext);
   const pathContextValue = useContext(PathContext);
   const [publicPathList, privatePathList, setPublicPathList, setPrivatePathList] = pathContextValue
   
@@ -35,10 +32,18 @@ const Navigation = () => {
   const redirectToLogin = () =>{
     navigate("/login")
   }
-  
+  const redirectToPrivatePath = () =>{
+    navigate("/private-path")
+  }
+  const redirectToPublicPath = () =>{
+    navigate("/public-path")
+  }
 
-  useEffect(()=>{
-  },[publicPathList, privatePathList])
+  const handleLogout = () =>{
+    setAuthState(false)
+  }
+
+
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: authState === true ? "#2ECC71" : "#E74C3C",
@@ -58,48 +63,29 @@ const Navigation = () => {
       <div style={{paddingBottom: "25px"}}>
         <Stack spacing={2}>
           <Item
-          >{(authState === true) ? <p>User is Logged in</p> : <p>User is NOT Logged in</p>}</Item>
+          >{(authState === true) ? <p>User is Logged in as <strong>{userDetails.userName}</strong></p> : <p>User is NOT Logged in</p>}</Item>
         </Stack>
         {authState === false && (<div style={{textAlign:"center"}}>
-          <Button onClick={() => redirectToLogin()}> Go to Log in Screen</Button>
+          <div style={{padding: "15px"}}>
+          <Button variant="outlined" onClick={() => redirectToLogin()}> Go to Log in Screen</Button>
+          </div>
         </div>)}
       </div>
       <div style={{textAlign: "center"}}>
-      <div style={{display: "flex", justifyContent: "space-around"}}> 
-        <Stack direction="row" spacing={2}>
-          {publicPathList.length > 0 && (<Item>
-            <Paper>
-              <MenuList>
-                {publicPathList.map((path) => {
-                  return(
-                    <MenuItem>{path}</MenuItem>
-                  )
-                })}
-              </MenuList>
-            </Paper>
-          </Item>)}
-          {privatePathList.length > 0 && (<Item>
-            <Paper>
-              <MenuList>
-                {privatePathList.map((path) => {
-                  return(
-                    <MenuItem>{path}</MenuItem>
-                  )
-                })}
-              </MenuList>
-            </Paper>
-          </Item>)}
-        </Stack>
-      </div>
       <div>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
-        <Fab disabled={publicPathList.length >= 5} variant="extended" size="medium" color="success" aria-label="add" onClick={() => handleAddPublicPath()}>
+        <Fab disabled={publicPathList.length >= 5} variant="extended" size="medium" color="success" aria-label="add" onClick={() => redirectToPublicPath()}>
           Add a Public Path
         </Fab>
-        <Fab disabled={privatePathList.length >= 5} variant="extended" size="medium" color="#E74C3C" aria-label="add" sx={{bgcolor: "#E74C3C"}} onClick={() => handleAddPrivatePath()}>
+        <Fab disabled={privatePathList.length >= 5} variant="extended" size="medium" color="#E74C3C" aria-label="add" sx={{bgcolor: "#E74C3C"}} onClick={() => redirectToPrivatePath()}>
           Add a Private Path
         </Fab>  
       </Box>
+      {authState === true && (<div style={{padding: "10px"}}>
+        <Fab disabled={privatePathList.length >= 5} variant="extended" size="medium" color="#E74C3C" aria-label="add" sx={{bgcolor: "#4770EC"}} onClick={() => handleLogout()}>
+            Log Out
+        </Fab> 
+      </div>) }
       </div>
       </div>
     </div>

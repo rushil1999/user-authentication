@@ -1,19 +1,17 @@
 import React, {useContext} from 'react'
 import {AuthContext} from '../contexts/AuthContextProvider';
+import { Navigate, useLocation } from 'react-router-dom';
 const PrivatePath = ({children}) => {
 
-  const userContext = useContext(AuthContext);
-  const {userState} = userContext;
-  if(userState === false){  
-    console.log("User is NOT Signed in")
-
-  }
-  else{
-    console.log("User is signed in")
-  }
+  const location = useLocation()
+  const authContext = useContext(AuthContext);
+  const [authState] = authContext;
+  
   return(
     <>
-      {children}
+      {authState ? (<>{children}</>) : (
+        <Navigate to="/login" state={{ from: location }} replace />
+      ) }
     </>
   )
 
