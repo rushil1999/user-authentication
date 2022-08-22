@@ -8,7 +8,7 @@ const PathContextProvider = ({children}) => {
 
   
   return(
-    <PathContext.Provider value={{publicPathList, privatePathList, setPublicPathList, setPrivatePathList}}>
+    <PathContext.Provider value={[publicPathList, privatePathList, setPublicPathList, setPrivatePathList]}>
       {children}
     </PathContext.Provider>
   )
