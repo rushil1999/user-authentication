@@ -1,21 +1,21 @@
 import React, {useContext, useState} from 'react';
 import { AuthContext } from '../contexts/AuthContextProvider';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
 const Login = () => {
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [userName, setUserName] = useState("")
   const [userNameFieldMessage, setUserNameFieldMessage] = useState("");
   const [userNameFieldError, setUserNameFieldError] = useState(false);
-
-  const navigate = useNavigate();
-
   const [authState, setAuthState, userDetails, setUserDetails] = useContext(AuthContext);
-  const handleLogin = () => {
 
+  const handleLogin = () => {
     if(userName.length == 0){
       setUserNameFieldMessage("Please fill in the name");
       setUserNameFieldError(true);
@@ -25,10 +25,9 @@ const Login = () => {
       return;
     }
     
-    console.log("Herereerere");
     setAuthState(true);
     setUserDetails({...userDetails, userName});
-    navigate("/navigation")
+    navigate(`${location.state.from.pathname}`)
   }
 
   const handleUserNameFieldChange = (e) => {
