@@ -42,6 +42,7 @@ const Navigation = () => {
       borderRadius: 2,
       borderColor: 'red',
       p: 2,
+      height: "15px"
     }
   }));
 
@@ -51,7 +52,7 @@ const Navigation = () => {
       <div style={{paddingBottom: "25px"}}>
         <Stack spacing={2}>
           <Item
-          >{(authState === true) ? <p>User is Logged in as <strong>{userDetails.userName}</strong></p> : <p>User is NOT Logged in</p>}</Item>
+          >{(authState === true) ? <p style={{fontFamily: "papyrus"}}>User is Logged in as <strong>{userDetails.userName}</strong></p> : <p style={{fontFamily: "papyrus"}}>User is NOT Logged in</p>}</Item>
         </Stack>
         {authState === false && (<div style={{textAlign:"center"}}>
           <div style={{padding: "15px"}}>
