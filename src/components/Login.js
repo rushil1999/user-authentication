@@ -10,13 +10,23 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //State to store username entered by user
   const [userName, setUserName] = useState("")
+
+  //State to give message to user in case of any form error
   const [userNameFieldMessage, setUserNameFieldMessage] = useState("");
+
+  // State to indicate whether error is occured ot not 
   const [userNameFieldError, setUserNameFieldError] = useState(false);
+
+  //useContext hook in action
+  // useContext hook takes in the Context( AuthContext in this case) exported by the Context Provider component and gets the functions and objects passed in context
   const [authState, setAuthState, userDetails, setUserDetails] = useContext(AuthContext);
 
+  // Function to handle the event when user clicks login
   const handleLogin = () => {
-    if(userName.length == 0){
+    //User name must not be empty
+    if(userName.length === 0){
       setUserNameFieldMessage("Please fill in the name");
       setUserNameFieldError(true);
       return;
@@ -25,11 +35,15 @@ const Login = () => {
       return;
     }
     
+    //This is where the child component, update the context state so all the components consuming the context can now refer to updated value
     setAuthState(true);
     setUserDetails({...userDetails, userName});
+
+    //Navigating to the previoue URL on successfull login
     navigate(`${location.state.from.pathname}`)
   }
 
+  //Stores username to state
   const handleUserNameFieldChange = (e) => {
     if(e.target.value > 0){
       setUserNameFieldMessage("");

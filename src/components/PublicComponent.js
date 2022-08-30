@@ -22,7 +22,7 @@ const PublicComponent = () => {
     }
 
     const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor:  "#CFDF2E",
+        backgroundColor:  "#8BD3F7",
         padding: theme.spacing(1),
         textAlign: 'center',
         sx:{
@@ -62,7 +62,7 @@ const PublicComponent = () => {
                     borderColor: 'primary.main', 
                     boxShadow: 1, 
                     bgcolor: "#C3EAD4", 
-                    color: "#58615C"
+                    color: "#000406"
                 }} 
                 >
                 This Public Component can be access regardless of whether the user is signed in or not. Landing pages, project blogs or pages that you 

@@ -22,7 +22,7 @@ const PrivateComponent = () => {
     }
 
     const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor:  "#E74C3C",
+        backgroundColor:  "#8BD3F7",
         padding: theme.spacing(1),
         textAlign: 'center',
         sx:{
@@ -62,7 +62,7 @@ const PrivateComponent = () => {
                     borderColor: 'primary.main', 
                     boxShadow: 1, 
                     bgcolor: "#C3EAD4", 
-                    color: "#58615C"
+                    color: "#000406"
                 }} 
                 >
                 This is a Private component and can only be access by Users that are signed in. 
