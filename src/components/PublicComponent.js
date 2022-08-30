@@ -18,7 +18,7 @@ const PublicComponent = () => {
     }
 
     const redirectToNavigation  = () => {
-        navigate("/navigation")
+        navigate("/")
     }
 
     const Item = styled(Paper)(({ theme }) => ({
